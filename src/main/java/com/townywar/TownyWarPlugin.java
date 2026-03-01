@@ -2,6 +2,7 @@ package com.townywar;
 
 import com.townywar.battle.BattleCycleManager;
 import com.townywar.command.WarCommand;
+import com.townywar.command.WarTabCompleter;
 import com.townywar.economy.EconomyHook;
 import com.townywar.listener.WarListener;
 import com.townywar.lock.LockManager;
@@ -50,7 +51,12 @@ public class TownyWarPlugin extends JavaPlugin {
             BattleCycleManager battleCycleManager = new BattleCycleManager(this, warManager, townyHook, getConfig());
             battleCycleManager.start();
 
-            getCommand("war").setExecutor(new WarCommand(warManager, townyHook, rewardManager, economyHook, getConfig()));
+            var warCommand = getCommand("war");
+            if (warCommand == null) {
+                throw new IllegalStateException("/war command missing from plugin.yml");
+            }
+            warCommand.setExecutor(new WarCommand(warManager, townyHook, rewardManager, economyHook, getConfig()));
+            warCommand.setTabCompleter(new WarTabCompleter(townyHook, getConfig()));
             Bukkit.getPluginManager().registerEvents(new WarListener(this, warManager, pointsManager, townyHook, rewardManager, getConfig()), this);
             getLogger().info("TownyWar enabled with Vault + Towny integration.");
         } catch (Exception e) {

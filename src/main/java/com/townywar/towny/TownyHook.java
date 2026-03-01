@@ -98,6 +98,44 @@ public class TownyHook {
         }
     }
 
+
+
+    public java.util.List<String> listTownNames() {
+        try {
+            Class<?> universe = Class.forName("com.palmergames.bukkit.towny.object.TownyUniverse");
+            Method getInstance = universe.getMethod("getInstance");
+            Object instance = getInstance.invoke(null);
+            Method getTowns = universe.getMethod("getTowns");
+            Collection<?> towns = (Collection<?>) getTowns.invoke(instance);
+            java.util.List<String> names = new java.util.ArrayList<>();
+            for (Object town : towns) {
+                Method getName = town.getClass().getMethod("getName");
+                names.add((String) getName.invoke(town));
+            }
+            return names;
+        } catch (Exception e) {
+            return java.util.Collections.emptyList();
+        }
+    }
+
+    public java.util.List<String> listNationNames() {
+        try {
+            Class<?> universe = Class.forName("com.palmergames.bukkit.towny.object.TownyUniverse");
+            Method getInstance = universe.getMethod("getInstance");
+            Object instance = getInstance.invoke(null);
+            Method getNations = universe.getMethod("getNations");
+            Collection<?> nations = (Collection<?>) getNations.invoke(instance);
+            java.util.List<String> names = new java.util.ArrayList<>();
+            for (Object nation : nations) {
+                Method getName = nation.getClass().getMethod("getName");
+                names.add((String) getName.invoke(nation));
+            }
+            return names;
+        } catch (Exception e) {
+            return java.util.Collections.emptyList();
+        }
+    }
+
     public void forcePvp(String sideA, String sideB, boolean enabled) {
         plugin.getLogger().info("[TownyWar] PvP override for " + sideA + " vs " + sideB + " = " + enabled + " (integration hook)");
     }
