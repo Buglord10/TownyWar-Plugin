@@ -1,0 +1,14 @@
+name: TownyWar
+version: ${project.version}
+main: com.townywar.TownyWarPlugin
+api-version: '1.20'
+authors: [Codex]
+depend: [Vault]
+softdepend: [Towny]
+commands:
+  war:
+    usage: /war <declare|end|reward>
+    permission: townywar.use
+permissions:
+  townywar.use:
+    default: true

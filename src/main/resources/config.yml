@@ -1,0 +1,25 @@
+war:
+  warmup_minutes: 2
+  battle_interval_minutes: 10
+  battle_duration_minutes: 5
+  win_points: 100
+  max_duration_minutes: 60
+  reward_gui:
+    force_selection: true
+    selection_timeout_minutes: 10
+  points:
+    kill_in_active_zone: 1
+    kill_outside_zone: 2
+    kill_cooldown_seconds: 120
+
+rewards:
+  forced_nation_lock_days: 7
+  forced_merge_lock_days: 14
+  money:
+    min_percentage: 5
+    max_percentage: 50
+
+economy:
+  declaration_cost: 10000
+  surrender_fee: 5000
+  reward_bonus: 20000
